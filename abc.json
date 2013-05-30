@@ -1,0 +1,13 @@
+{
+    "name": "scroll-monitor",
+    "version": "1.0",
+    "desc": "滚动监听器，获取滚动信息，添加不同状态的滚动事件，适用于下拉加载",
+    "cover": "",
+    "author": {
+        "name": "虎牙",
+        "email": "ningzbruc@gmail.com",
+        "page": "https://github.com/kingback"
+    },
+    "type": "kissy-pie",
+    "type-url": "http://abc.alibaba-inc.com/r/kissy-pie"
+}
