@@ -230,7 +230,8 @@
                     
                     initScrollMonitor: function() {
                         this.monitor = new ScrollMonitor({
-                            node: 'body'    
+                            node: 'body',
+                            margin: 70
                         });
                         this.monitor.on('scrollToBottom', function(e) {
                             this.load();
