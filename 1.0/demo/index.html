@@ -1,53 +1,335 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <title>demo标题</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <script src="http://a.tbcdn.cn/s/kissy/1.3.0/seed-min.js" charset="utf-8"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-    </style>
-</head>
-<body>
-<h2>demo标题</h2>
-<div class="scroller" style="height: 800px; width: 100%;">
-    <div><input type="text" /></div>
-</div>
-
-<script>
-    var S = KISSY;
-    if (S.Config.debug) {
-        var srcPath = "../../../";
-        S.config({
-            packages:[
-                {
-                    name:"mobile",
-                    path:srcPath,
-                    charset:"utf-8",
-                    ignorePackageNameInUri:true
+    <head>
+        <meta charset="utf-8"/>
+        <title>demo标题</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="stylesheet" href="http://a.tbcdn.cn/p/global/1.0/global-min.css" />
+        <script src="http://a.tbcdn.cn/s/kissy/1.3.0/seed-min.js" charset="utf-8"></script>
+        <style>
+            html {
+                background: #f0f0f0;
+            }
+            .clearfix:after {
+                content: ".";
+                display: block;
+                height: 0;
+                font-size: 0;
+                clear: both;
+                visibility: hidden;
+            }
+            
+            .header {
+                background: #333;
+            }
+            .header h1 {
+                width: 960px;
+                margin: 0 auto;
+                padding: 15px 10px;
+            }
+            
+            .db-wrapper {
+                width: 940px;
+                margin: 0 auto;
+            }
+            .db-list {
+                overflow: hidden;
+                min-height: 200px;
+            }
+            .db-item {
+                float: left;
+                background: #fff;
+                margin: 20px 20px 0 0;
+            }
+            .db-list .db-item:nth-child(4n) {
+                margin-right: 0;
+            }
+            .db-con {
+                padding: 10px;
+            }
+            .db-image {
+                width: 200px;
+                height: 150px;
+            }
+            .db-image img {
+                vertical-align: bottom;
+            }
+            .db-tools {
+                margin-top: 10px;
+            }
+            .db-tools li {
+                float: right;
+                margin-left: 12px;
+                line-height: 12px;
+            }
+            .db-tools a {
+                display: inline-block;
+                padding-left: 15px;
+                color: #aaa;
+            }
+            .db-tools a:hover {
+                color: #777;
+                text-decoration: none;
+            }
+            .db-fav a {
+                background: url("http://dribbble.com/images/icon-hearts.png") 0 1px no-repeat;
+            }
+            .db-cmnt a {
+                background: url("http://dribbble.com/images/icon-comments.png") 0 1px no-repeat;
+            }
+            .db-views a {
+                padding-left: 18px;
+                background: url("http://dribbble.com/images/icon-views-sm.png") 0 1px no-repeat;
+            }
+            .db-fav a:hover,
+            .db-cmnt a:hover {
+                background-position: 0 -14px;
+            }
+            .db-loading {
+                text-align: center;
+                padding: 20px 0;
+                font-family: monaco;
+            }
+            .db-loading p {
+                display: inline-block;
+                font-size: 18px;
+                color: #ea4c89;
+            }
+            .db-loading b {
+                display: inline-block;
+                margin-right: 10px;
+                background: url("http://www.thedoghat.com/wp-content/uploads/2013/02/dribbble-logo.png") 0 0 no-repeat;
+                height: 30px;
+                width: 30px;
+                background-size: 30px 30px;
+                vertical-align: middle;
+                -webkit-animation: circle 1.5s linear 0s infinite normal;
+            }
+            .db-loading b.stop {
+                -webkit-animation-play-state: paused;
+            }
+            .db-loading span {
+                display: inline-block;
+                vertical-align: middle;
+            }
+            @-webkit-keyframes circle { 
+                from {
+                    -webkit-transform: rotate(0deg);
+                } 
+                to {
+                    -webkit-transform: rotate(360deg);
+                }  
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page">
+            <div class="header">
+                <h1>
+                    <a href="http://dribbble.com/">
+                        <img src="http://dribbble.com/images/dribbble-hd.png" width="100" height="26" title="dribbble" />
+                    </a>
+                </h1>
+            </div>
+            <script type="text/x-template" id="J_db_template">
+            {@each shots as s,k}
+                <li class="db-item">
+                    <div class="db-con">
+                        <div class="db-shot">
+                            <div class="db-image">
+                                <a href="${s.url}" class="db-link">
+                                    <img src="${s.image_teaser_url}" title="${s.title}" />
+                                </a>
+                                <a href="${s.url}" class="db-over"></a>
+                            </div>
+                        </div>
+                        <ul class="db-tools clearfix">
+                            <li class="db-fav">
+                                <a href="${s.url}/fans" title="See fans of this screenshot">${s.likes_count}</a>
+                            </li>
+                            <li class="db-cmnt">
+                                <a href="${s.url}#comments" title="View comments on this screenshot">${s.comments_count}</a>
+                            </li>
+                            <li class="db-views">
+                                <a href="javascript:void('views')">${s.views_count}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            {@/each}
+            </script>
+            <div class="db-wrapper">
+                <ol class="db-list clearfix"></ol>
+            </div>
+            <div class="db-loading">
+                <p><b></b><span>Loading Shots...</span></p>
+            </div>
+        </div>
+        
+        <script>
+            var S = KISSY;
+            if (S.Config.debug) {
+                var srcPath = "../../../";
+                S.config({
+                    packages:[
+                        {
+                            name:"mgallery",
+                            path:srcPath,
+                            charset:"utf-8",
+                            ignorePackageNameInUri:true
+                        }
+                    ]
+                });
+            }
+        
+            S.use('node,sizzle,ajax,rich-base,mgallery/scroll-monitor/1.0/,gallery/juicer/1.0/', function (S, Node, Sizzle, Ajax, RichBase, ScrollMonitor, Juicer) {
+                
+                var DribbbleLoader = RichBase.extend({
+                    
+                    initializer: function() {
+                        this.container = this.get('container');
+                        this.template = Juicer(this.get('template'));
+                        this.resultFormatter = this.get('resultFormatter');
+                        this.pageNum = 0;
+                        
+                        this.initScrollMonitor();
+                    },
+                    
+                    destructor: function() {
+                        this.monitor.destroy()    
+                    },
+                    
+                    initScrollMonitor: function() {
+                        this.monitor = new ScrollMonitor({
+                            node: 'body'    
+                        });
+                        this.monitor.on('scrollToBottom', function(e) {
+                            this.load();
+                        }, this);
+                    },
+                    
+                    run: function() {
+                        this.monitor.run();
+                        return this;
+                    },
+                    
+                    stop: function() {
+                        this.monitor.stop();
+                        return this;    
+                    },
+                    
+                    add: function(r) {
+                        this.container.append(this.tpl(r));
+                        this.fire('add');
+                        return this;
+                    },
+                    
+                    tpl: function(r) {
+                        var data = this.resultFormatter ? this.resultFormatter.call(this, r) || null : r,
+                            html = '';
+                        
+                        if (data) {
+                            html = this.template.render(data);
+                        }
+                        
+                        return html;
+                    },
+                    
+                    load: function() {
+                        var self = this,
+                            url = this.get('API') + '?' + S.param({
+                                'per_page': this.get('pageSize'),
+                                'page': ++this.pageNum
+                            });
+                        
+                        S.jsonp(url, function(r) {
+                            if (r && r.shots && r.shots.length) {
+                                self.add(r);
+                            } else {
+                                if (r && (!r.shots || r.shots.length)) {
+                                    self.fire('end');
+                                } else {
+                                    self.fire('error');
+                                }
+                            }
+                        });
+                        
+                        return this;
+                    }
+                    
+                }, {
+                    
+                    ATTRS: {
+                        
+                        container: {
+                            setter: function(v) {
+                                return S.one(v);
+                            }
+                        },
+                        
+                        template: {
+                            value: ''    
+                        },
+                        
+                        resultFormatter: {
+                            value: null
+                        },
+                        
+                        pageSize: {
+                            getter: function(v) {
+                                return S.UA.mobile ? Math.ceil(v / 2) : v;    
+                            },
+                            value: 20
+                        },
+                        
+                        API: {
+                            value: 'http://api.dribbble.com/shots/popular'
+                        }
+                        
+                    }
+                    
+                });
+                
+                var loader = new DribbbleLoader({
+                    container: '.db-list',
+                    pageSize: 32,
+                    template: S.one('#J_db_template').html()
+                });
+                
+                var loadingText = S.one('.db-loading span'),
+                    loadingIcon = S.one('.db-loading b'),
+                    added = false;
+                
+                function updateLoadingText(text) {
+                    loadingText.html(text);
                 }
-            ]
-        });
-    }
-
-    S.use('mobile/scroll-monitor/1.0/', function (S, ScrollMonitor) {
-        var monitor = new ScrollMonitor({
-        	node: document.documentElement,
-        	margin: 0
-        });
-        
-        monitor.on('scrollToBottom', function(e) {
-            console.log(e);
-        });
-        
-        monitor.run();
-        
-        console.log(monitor);
-    })
-</script>
-</body>
+                
+                function stopIconAnimation() {
+                    loadingIcon.addClass('stop');
+                }
+                
+                loader.on('add', function() {
+                    if (!added) {
+                        updateLoadingText('Loading More Shots...');
+                    }
+                    added = true;
+                });
+                
+                loader.on('end', function() {
+                    updateLoadingText('No More Shots.');
+                    stopIconAnimation();
+                    this.stop();
+                });
+                
+                loader.on('error', function() {
+                    updateLoadingText('Loading Error!');
+                    stopIconAnimation();
+                    this.stop();
+                });
+                
+                loader.run();
+                    
+            })
+        </script>
+    </body>
 </html>
