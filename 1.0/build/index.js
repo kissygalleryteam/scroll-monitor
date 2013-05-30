@@ -463,8 +463,8 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
             scrollRight : scrollRight,
             scrollTop   : scrollTop,
             scrollWidth : scrollWidth
-	    };
-	};
+        };
+    };
     
     return ScrollMonitor;
     

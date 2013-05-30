@@ -457,8 +457,8 @@ KISSY.add(function(S, Node, Event, Base) {
             scrollRight : scrollRight,
             scrollTop   : scrollTop,
             scrollWidth : scrollWidth
-	    };
-	};
+        };
+    };
     
     return ScrollMonitor;
     
