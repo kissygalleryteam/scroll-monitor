@@ -216,7 +216,8 @@ KISSY.add(function(S, Node, Event, Base) {
                 lastScroll = this._lastScroll,
                 hasLast = !!lastScroll;
 			
-			//TODO Mac触控板和手机设备触控下拉到边界时，会有一个弹动的效果，这个时候依然发生scroll事件
+			//TODO 
+			//Mac触控板和手机设备触控下拉到边界时，会有一个弹动的效果，这个时候依然发生scroll事件
 			//是否增加isBounce等属性
 			
             return S.merge(info, {
@@ -420,9 +421,11 @@ KISSY.add(function(S, Node, Event, Base) {
         	scrollElem   = isBody && !webkit ? docEl : elem,
         	
         	//TODO Android未测试
+        	
         	//webkit只在documentELement上返回正确的窗口尺寸
         	//在ios里，documentELement.clientWidth/clientHeight不可靠，因为导航条会被顶上去
         	//但是ios里，window.innerWidth/innerHeight能提供实时的窗口大小
+        	
             viewportElem = iosHack ? win : (isBody && webkit ? docEl : scrollElem),
             
             viewportHeight = iosHack ? viewportElem.innerHeight : viewportElem.clientHeight,
