@@ -28,13 +28,13 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
         docEl = doc.documentElement,
         
         ios = S.UA.ios,
-		webkit = S.UA.webkit,
-		
-		NODE = 'node',
-		MARGIN = 'margin',
-		DELAY = 'delay',
-		RUN = 'run',
-		DESTROYED = 'destroyed',
+        webkit = S.UA.webkit,
+        
+        RUN = 'run',
+        NODE = 'node',
+        DELAY = 'delay',
+        MARGIN = 'margin',
+        DESTROYED = 'destroyed',
         
         EVT_RESIZE = 'resize',
         EVT_SCROLL = 'scroll',
