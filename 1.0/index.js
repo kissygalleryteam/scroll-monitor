@@ -12,6 +12,7 @@ KISSY.add(function(S, Node, Event, Base) {
 /**
  * 滚动监听器
  * @module scroll-monitor
+ * @see http://yuilibrary.com/yui/docs/api/classes/Plugin.ScrollInfo.html 
  */
     
     'use strict';
