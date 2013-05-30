@@ -23,9 +23,9 @@
                 background: #333;
             }
             .header h1 {
-                width: 960px;
+                width: 940px;
                 margin: 0 auto;
-                padding: 15px 10px;
+                padding: 15px 0;
             }
             
             .db-wrapper {
@@ -81,9 +81,11 @@
                 padding-left: 18px;
                 background: url("http://dribbble.com/images/icon-views-sm.png") 0 1px no-repeat;
             }
-            .db-fav a:hover,
+            .db-fav a:hover {
+                background-position: 0 -16px;
+            }
             .db-cmnt a:hover {
-                background-position: 0 -14px;
+                background-position: 0 -15px;
             }
             .db-loading {
                 text-align: center;
@@ -101,24 +103,48 @@
                 background: url("http://www.thedoghat.com/wp-content/uploads/2013/02/dribbble-logo.png") 0 0 no-repeat;
                 height: 30px;
                 width: 30px;
-                background-size: 30px 30px;
                 vertical-align: middle;
+                -webkit-background-size: 30px 30px;
+                -moz-background-size: 30px 30px;
+                -o-background-size: 30px 30px;
+                -ms-background-size: 30px 30px;
+                background-size: 30px 30px;
                 -webkit-animation: circle 1.5s linear 0s infinite normal;
+                -moz-animation: circle 1.5s linear 0s infinite normal;
+                -o-animation: circle 1.5s linear 0s infinite normal;
+                -ms-animation: circle 1.5s linear 0s infinite normal;
+                animation: circle 1.5s linear 0s infinite normal;
             }
             .db-loading b.stop {
                 -webkit-animation-play-state: paused;
+                -moz-animation-play-state: paused;
+                -o-animation-play-state: paused;
+                -ms-animation-play-state: paused;
+                animation-play-state: paused;
             }
             .db-loading span {
                 display: inline-block;
                 vertical-align: middle;
             }
             @-webkit-keyframes circle { 
-                from {
-                    -webkit-transform: rotate(0deg);
-                } 
-                to {
-                    -webkit-transform: rotate(360deg);
-                }  
+                from { -webkit-transform: rotate(0deg); } 
+                to { -webkit-transform: rotate(360deg); }  
+            }
+            @-moz-keyframes circle { 
+                from { -moz-transform: rotate(0deg); } 
+                to { -moz-transform: rotate(360deg); }  
+            }
+            @-o-keyframes circle { 
+                from { -o-transform: rotate(0deg); } 
+                to { -o-transform: rotate(360deg); }  
+            }
+            @-ms-keyframes circle { 
+                from { -ms-transform: rotate(0deg); } 
+                to { -ms-transform: rotate(360deg); }  
+            }
+            @keyframes circle { 
+                from { transform: rotate(0deg); } 
+                to { transform: rotate(360deg); }  
             }
         </style>
     </head>
@@ -173,7 +199,7 @@
                 S.config({
                     packages:[
                         {
-                            name:"mgallery",
+                            name:"gallery",
                             path:srcPath,
                             charset:"utf-8",
                             ignorePackageNameInUri:true
@@ -182,7 +208,7 @@
                 });
             }
         
-            S.use('node,sizzle,ajax,rich-base,mgallery/scroll-monitor/1.0/,gallery/juicer/1.0/', function (S, Node, Sizzle, Ajax, RichBase, ScrollMonitor, Juicer) {
+            S.use('node,sizzle,ajax,rich-base,gallery/scroll-monitor/1.0/,gallery/juicer/1.0/', function (S, Node, Sizzle, Ajax, RichBase, ScrollMonitor, Juicer) {
                 
                 var DribbbleLoader = RichBase.extend({
                     
