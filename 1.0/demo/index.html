@@ -81,6 +81,9 @@
                 padding-left: 18px;
                 background: url("http://dribbble.com/images/icon-views-sm.png") 0 1px no-repeat;
             }
+            .db-views a:hover {
+                color: #aaa;
+            }
             .db-fav a:hover {
                 background-position: 0 -16px;
             }
@@ -152,7 +155,7 @@
         <div class="page">
             <div class="header">
                 <h1>
-                    <a href="http://dribbble.com/">
+                    <a href="http://dribbble.com/" target="_blank">
                         <img src="http://dribbble.com/images/dribbble-hd.png" width="100" height="26" title="dribbble" />
                     </a>
                 </h1>
@@ -163,18 +166,18 @@
                     <div class="db-con">
                         <div class="db-shot">
                             <div class="db-image">
-                                <a href="${s.url}" class="db-link">
+                                <a href="${s.url}" target="_blank" class="db-link">
                                     <img src="${s.image_teaser_url}" title="${s.title}" />
                                 </a>
-                                <a href="${s.url}" class="db-over"></a>
+                                <a href="${s.url}" target="_blank" class="db-over"></a>
                             </div>
                         </div>
                         <ul class="db-tools clearfix">
                             <li class="db-fav">
-                                <a href="${s.url}/fans" title="See fans of this screenshot">${s.likes_count}</a>
+                                <a href="${s.url}/fans" target="_blank" title="See fans of this screenshot">${s.likes_count}</a>
                             </li>
                             <li class="db-cmnt">
-                                <a href="${s.url}#comments" title="View comments on this screenshot">${s.comments_count}</a>
+                                <a href="${s.url}#comments" target="_blank" title="View comments on this screenshot">${s.comments_count}</a>
                             </li>
                             <li class="db-views">
                                 <a href="javascript:void('views')">${s.views_count}</a>
