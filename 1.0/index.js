@@ -214,6 +214,7 @@ KISSY.add(function(S, Node, Event, Base) {
             var info = ScrollMonitor.getScrollInfo(this._domNode, this._margin),
                 lastScroll = this._lastScroll,
                 hasLast = !!lastScroll;
+            
             //TODO
             //Mac触控板和手机设备触控下拉到边界时，会有一个弹动的效果，这个时候依然发生scroll事件
             //是否增加isBounce等属性
@@ -412,12 +413,12 @@ KISSY.add(function(S, Node, Event, Base) {
      */
     ScrollMonitor.getScrollInfo = function(selector, margin) {
         var elem = S.get(selector),
-        	isBody = elem === body || elem === docEl || elem === win,
-        	iosHack = isBody && ios,
-        	
+            isBody = elem === body || elem === docEl || elem === win,
+            iosHack = isBody && ios,
+            
             //webkit只在body上返回正确的scroll信息，其他则是documentElement
             scrollElem   = isBody && !webkit ? docEl : elem,
-        	
+            
             //TODO Android未测试
             
             //webkit只在documentELement上返回正确的窗口尺寸
@@ -457,7 +458,7 @@ KISSY.add(function(S, Node, Event, Base) {
             scrollTop   : scrollTop,
             scrollWidth : scrollWidth
 	    };
-   	};
+	};
     
     return ScrollMonitor;
     
