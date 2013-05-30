@@ -96,16 +96,15 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @type Node
          */
     	node: {
-    		setter: function(v) {
-    			v = S.get(v);
-    			
-    			//body, documentElement和window都当成body统一处理
-            	if (v === docEl || v === win) {
-            		v = body;
-            	}
-            	
+    	    setter: function(v) {
+                v = S.get(v);
+                //body, documentElement，window都当成body统一处理
+                if (v === docEl || v === win) {
+                    v = body;
+                }
+                
                 return S.one(v);
-    		}
+            }
     	},
     	
     	/**
@@ -115,7 +114,7 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @default 15
          */
         delay: {
-        	value: 15
+            value: 15
         },
         
         /**
@@ -125,7 +124,7 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @default 30
          */
         margin: {
-        	value: 30
+            value: 30
         },
         
         /**
@@ -135,7 +134,7 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @default false
          */
         run: {
-        	value: false
+            value: false
         },
         
         /**
@@ -145,15 +144,15 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @default false
          */
         destroyed: {
-        	value: false
+            value: false
         }
     };
 
     S.extend(ScrollMonitor, Base, {
         
         // -- Lifecycle Methods ----------------------------------------------------
-		
-		/**
+        
+        /**
          * 初始化
          * @method init
          * @public
@@ -207,8 +206,8 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @public
          */
         checkScroll: function() {
-        	Event.fire(this._scrollNode, EVT_SCROLL);
-        	return this;
+            Event.fire(this._scrollNode, EVT_SCROLL);
+            return this;
         },
         
         /**
@@ -221,10 +220,9 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
             var info = ScrollMonitor.getScrollInfo(this._domNode, this._margin),
                 lastScroll = this._lastScroll,
                 hasLast = !!lastScroll;
-			
-			//TODO 
-			//Mac触控板和手机设备触控下拉到边界时，会有一个弹动的效果，这个时候依然发生scroll事件
-			//是否增加isBounce等属性
+            //TODO
+            //Mac触控板和手机设备触控下拉到边界时，会有一个弹动的效果，这个时候依然发生scroll事件
+            //是否增加isBounce等属性
 			
             return S.merge(info, {
                 isScrollDown : hasLast && info.scrollTop > lastScroll.scrollTop,
@@ -241,7 +239,7 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @public
          */
         run: function() {
-        	this.set(RUN, true);
+            this.set(RUN, true);
             return this;
         },
         
@@ -294,9 +292,9 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @protected
          */
         _stopMonitor: function() {
-        	clearTimeout(this._scrollTimeout);
-        	this._lastScroll = null;
-        	this._detachScroll();
+            clearTimeout(this._scrollTimeout);
+            this._lastScroll = null;
+            this._detachScroll();
         },
         
         /**
@@ -306,8 +304,8 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @protected
          */
         _triggerScroll: function (e) {
-            var info       = this.getScrollInfo(),
-                facade     = S.mix(info, { domEvent: e }),
+            var info = this.getScrollInfo(),
+                facade = S.mix(info, { domEvent: e }),
                 lastScroll = this._lastScroll;
     
             this._lastScroll = info;
@@ -354,7 +352,7 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @protected
          */
         _afterResize: function (e) {
-        	//TODO 是否需要
+            //TODO 是否需要
             this.checkScroll();
         },
         
@@ -381,7 +379,7 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @protected
          */
         _afterDelayChange: function(e) {
-        	this._delay = e.newVal;
+            this._delay = e.newVal;
         },
         
         /**
@@ -391,7 +389,7 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @protected
          */
         _afterMarginChange: function(e) {
-        	this._margin = e.newVal;
+            this._margin = e.newVal;
         },
         
         /**
@@ -401,16 +399,16 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
          * @protected
          */
         _afterRunChange: function(e) {
-        	if (e.newVal) {
-        		this._runMonitor();
-        	} else {
-        		this._stopMonitor();
-        	}
+            if (e.newVal) {
+                this._runMonitor();
+            } else {
+                this._stopMonitor();
+            }
         }
         
     });
     
-	/**
+    /**
      * 获取滚动信息
      * @method getScrollInfo
      * @param {String|HTMLElement|Node} selector 节点选择器
@@ -419,19 +417,19 @@ KISSY.add('gallery/scroll-monitor/1.0/index',function(S, Node, Event, Base) {
      * @static
      */
     ScrollMonitor.getScrollInfo = function(selector, margin) {
-        var elem         = S.get(selector),
-        	isBody       = elem === body || elem === docEl || elem === win,
-        	iosHack      = isBody && ios,
+        var elem = S.get(selector),
+        	isBody = elem === body || elem === docEl || elem === win,
+        	iosHack = isBody && ios,
         	
-        	//webkit只在body上返回正确的scroll信息，其他则是documentElement
-        	scrollElem   = isBody && !webkit ? docEl : elem,
+            //webkit只在body上返回正确的scroll信息，其他则是documentElement
+            scrollElem   = isBody && !webkit ? docEl : elem,
         	
-        	//TODO Android未测试
-        	
-        	//webkit只在documentELement上返回正确的窗口尺寸
-        	//在ios里，documentELement.clientWidth/clientHeight不可靠，因为导航条会被顶上去
-        	//但是ios里，window.innerWidth/innerHeight能提供实时的窗口大小
-        	
+            //TODO Android未测试
+            
+            //webkit只在documentELement上返回正确的窗口尺寸
+            //在ios里，documentELement.clientWidth/clientHeight不可靠，因为导航条会被顶上去
+            //但是ios里，window.innerWidth/innerHeight能提供实时的窗口大小
+
             viewportElem = iosHack ? win : (isBody && webkit ? docEl : scrollElem),
             
             viewportHeight = iosHack ? viewportElem.innerHeight : viewportElem.clientHeight,
