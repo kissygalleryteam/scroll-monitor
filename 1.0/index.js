@@ -31,6 +31,11 @@ KISSY.add(function(S, Node, Event, Base) {
         MARGIN = 'margin',
         DESTROYED = 'destroyed',
         
+        EMPTY = '',
+        SPACE = ' ',
+        
+        EVT_RUN = RUN,
+        EVT_STOP = 'stop',
         EVT_RESIZE = 'resize',
         EVT_SCROLL = 'scroll',
         EVT_SCROLL_DOWN = 'scrollDown',
@@ -161,14 +166,21 @@ KISSY.add(function(S, Node, Event, Base) {
             //body没有scroll事件，因此绑定到window上
             this._scrollNode = this._isBody ? win : this._domNode;
             
-            this._margin = this.get(MARGIN);
             this._delay = this.get(DELAY);
+            this._margin = this.get(MARGIN);
+            
+            this.publish(EVT_RUN, {
+                defaultFn: S.bind(this._defRunFn, this)  
+            });
+            this.publish(EVT_STOP, {
+                defaultFn: S.bind(this._defStopFn, this)
+            });
             
             this.on(AFTER_DELAY_CHANGE, this._afterDelayChange);
             this.on(AFTER_MARGIN_CHANGE, this._afterMarginChange);
             this.on(AFTER_RUN_CHANGE, this._afterRunChange);
             
-            this.get(RUN) && this._runMonitor();
+            this.get(RUN) && this.fire(EVT_RUN);
         },
         
         /**
@@ -197,10 +209,12 @@ KISSY.add(function(S, Node, Event, Base) {
         /**
          * 检查当前滚动状态（手动触发scroll事件）
          * @method checkScroll
+         * @param {Boolean} force 是否删除lastScroll信息，强制触发scroll事件，默认为true
          * @chainable
          * @public
          */
-        checkScroll: function() {
+        checkScroll: function(force) {
+            force !== false && (this._lastScroll = null);
             Event.fire(this._scrollNode, EVT_SCROLL);
             return this;
         },
@@ -273,6 +287,33 @@ KISSY.add(function(S, Node, Event, Base) {
         },
         
         /**
+         * 更新四个方向的偏移值
+         * @method _refreshMargin
+         * @protected
+         */
+        _refreshMargin: function() {
+            var margin = this.get(MARGIN) + '',
+                vals = margin.split(' ');
+            
+            this._marginTop = Number(vals[0]);
+            this._marginRight = Number(vals[1]);
+            this._marginBottom = Number(vals[2]);
+            this._marginLeft = Number(vals[3]);
+            
+            switch (vals.length) {
+                case 1:
+                    this._marginRight = this._marginBottom = this._marginLeft = this._marginTop;
+                    break;
+                case 2:
+                    this._marginBottom = this._marginTop;
+                    this._marginLeft = this._marginRight;
+                    break;
+                case 3:
+                    this._marginLeft = this._marginRight;
+            } 
+        },
+        
+        /**
          * 开始监听滚动
          * @method _runMonitor
          * @protected
@@ -338,6 +379,28 @@ KISSY.add(function(S, Node, Event, Base) {
                 this.fire(EVT_SCROLL_TO_TOP, facade);
             }
         },
+        
+        // -- Protected Event Default Handlers ---------------------------------------------
+        
+        /**
+         * 默认run事件
+         * @method _defRunFn
+         * @param {EventFacade} e 事件对象
+         * @protected
+         */
+        _defRunFn: function(e) {
+            this._runMonitor();   
+        },
+        
+        /**
+         * 默认stop事件
+         * @method _defRunFn
+         * @param {EventFacade} e 事件对象
+         * @protected
+         */
+        _defStopFn: function(e) {
+            this._stopMonitor();
+        },
     
         // -- Protected Event Handlers ---------------------------------------------
         
@@ -349,7 +412,7 @@ KISSY.add(function(S, Node, Event, Base) {
          */
         _afterResize: function (e) {
             //TODO 是否需要
-            this.checkScroll();
+            this.checkScroll(false);
         },
         
         /**
@@ -396,9 +459,9 @@ KISSY.add(function(S, Node, Event, Base) {
          */
         _afterRunChange: function(e) {
             if (e.newVal) {
-                this._runMonitor();
+                this.fire(EVT_RUN);
             } else {
-                this._stopMonitor();
+                this.fire(EVT_STOP);
             }
         }
         
@@ -408,7 +471,7 @@ KISSY.add(function(S, Node, Event, Base) {
      * 获取滚动信息
      * @method getScrollInfo
      * @param {String|HTMLElement|Node} selector 节点选择器
-     * @param {Number} margin 偏移量
+     * @param {Number} margin 偏移量，四个方向类似css写法，10/10 5/10 5 15/10 5 15 20
      * @return {Object} 当前滚动状态的信息（不包括滚动方向）
      * @static
      */
@@ -437,15 +500,32 @@ KISSY.add(function(S, Node, Event, Base) {
             scrollWidth  = scrollElem.scrollWidth,
 
             scrollBottom = scrollTop + viewportHeight,
-            scrollRight  = scrollLeft + viewportWidth;
-        
-        margin = margin || 0;
+            scrollRight  = scrollLeft + viewportWidth,
+            
+            marginVals   = ((margin || 0) + EMPTY).split(SPACE),
+            marginTop    = Number(marginVals[0]),
+            marginRight  = Number(marginVals[1]),
+            marginBottom = Number(marginVals[2]),
+            marginLeft   = Number(marginVals[3]);
+            
+        switch (marginVals.length) {
+            case 1:
+                marginRight = marginBottom = marginLeft = marginTop;
+                break;
+            case 2:
+                marginBottom = marginTop;
+                marginLeft = marginRight;
+                break;
+            case 3:
+                marginLeft = marginRight;
+                break;
+        }
         
         return {
-            atBottom: scrollBottom >= (scrollHeight - margin),
-            atLeft  : scrollLeft <= margin,
-            atRight : scrollRight >= (scrollWidth - margin),
-            atTop   : scrollTop <= margin,
+            atBottom: scrollBottom >= (scrollHeight - marginBottom),
+            atLeft  : scrollLeft <= marginLeft,
+            atRight : scrollRight >= (scrollWidth - marginRight),
+            atTop   : scrollTop <= marginTop,
 
             viewportHeight: viewportHeight,
             viewportWidth : viewportWidth,
