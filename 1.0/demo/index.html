@@ -18,6 +18,16 @@
                     </a>
                 </h1>
             </div>
+            <div class="tabs">
+                <ul class="clearfix">
+                    <li data-api="list" data-cfg="list:popular" class="active">Popular</li>
+                    <li data-api="list" data-cfg="list:everyone">Everyone</li>
+                    <li data-api="list" data-cfg="list:debuts">Debuts</li>
+                    <li data-api="player" data-cfg="" class="player hidden">Player</li>
+                    <li data-api="following" data-cfg="" class="player hidden">Following</li>
+                    <li data-api="likes" data-cfg="" class="player hidden">Likes</li>
+                </ul>
+            </div>
             <script type="text/x-template" id="J_db_template">
             {@each shots as s,k}
                 <li class="db-item">
@@ -27,7 +37,10 @@
                                 <a href="${s.url}" target="_blank" class="db-link">
                                     <img src="${s.image_teaser_url}" title="${s.title}" />
                                 </a>
-                                <a href="${s.url}" target="_blank" class="db-over"></a>
+                                <a href="${s.url}" target="_blank" class="db-over">
+                                    <strong data-player="${s.player.name}" data-id="${s.player.id}" data-api="player" data-cfg="id:${s.player.id}">${s.player.name}</strong>
+                                    <em>${s.title}</em>
+                                </a>
                             </div>
                         </div>
                         <ul class="db-tools clearfix">

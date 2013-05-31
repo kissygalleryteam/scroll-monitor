@@ -9,19 +9,59 @@ html {
     clear: both;
     visibility: hidden;
 }
+.hidden {
+    display: none;
+}
 
 .header {
     background: #333;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
 }
 .header h1 {
-    max-width: 920px;
+    max-width: 940px;
     margin: 0 auto;
     padding: 15px 10px;
+}
+.tabs {
+    font-size: 14px;
+    color: #aaa;
+    padding: 0 10px 10px;
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    background: #f0f0f0;
+    z-index: 10;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.tabs ul {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 10px 0;
+    border-bottom: 1px solid #cecece;
+}
+.tabs li {
+    float: left;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.tabs li:hover {
+    color: #777;
+}
+.tabs li.active,
+.tabs li.active:hover {
+    font-weight: bold;
+    color: #555;
 }
 
 .db-wrapper {
     max-width: 940px;
-    padding: 0 10px;
+    padding: 102px 10px 0;
     margin: 0 auto;
 }
 .db-list {
@@ -34,7 +74,6 @@ html {
     background: #fff;
     margin-top: 2.127659574468085%;
     margin-right: 2.127659574468085%;
-    opacity: 0.8;
     
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -42,36 +81,18 @@ html {
     -ms-border-radius: 3px;
     border-radius: 3px;
     
-    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
-    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
-    -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
-    -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.07);
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.07);
+    -o-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.07);
+    -ms-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.07);
     
-    -webkit-transition: all 0.2s linear 0s;
-    -moz-transition: all 0.2s linear 0s;
-    -o-transition: all 0.2s linear 0s;
-    -ms-transition: all 0.2s linear 0s;
-    transition: all 0.2s linear 0s;
-    
-    -webkit-transition-property: opacity, -webkit-box-shadow;
-    -moz-transition-property: opacity, -moz-box-shadow;
-    -o-transition-property: opacity, -o-box-shadow;
-    -ms-transition-property: opacity, -ms-box-shadow;
-    transition-property: opacity, box-shadow;
-    
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -o-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    backface-visibility: hidden;
 }
 .db-item:hover {
-    opacity: 1;
-    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
-    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
-    -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
-    -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.12);
+    -o-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.12);
+    -ms-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.12);
     box-shadow: 0 2px 1px rgba(0, 0, 0, 0.12);
 }
 .db-list .db-item:nth-child(4n) {
@@ -88,7 +109,8 @@ html {
     height: 0;
     padding-bottom: 75%;
 }
-.db-link {
+.db-link,
+.db-over {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -96,7 +118,45 @@ html {
     top: 0;
     left: 0;
 } 
-.db-image img {
+.db-over {
+    background: rgba(255, 255, 255, 1);
+    color: #666;
+    opacity: 0;
+    padding: 10px;
+    left: -10px;
+    top: -10px;
+    
+    -webkit-transition: opacity 0.2s linear 0s;
+    -moz-transition: opacity 0.2s linear 0s;
+    -o-transition: opacity 0.2s linear 0s;
+    -ms-transition: opacity 0.2s linear 0s;
+    transition: opacity 0.2s linear 0s;
+}
+.db-over:hover {
+    background: rgba(255, 255, 255, 0.9);
+    opacity: 1;
+    color: #666;
+    text-decoration: none;
+}
+.db-over em {
+    display: block;
+    padding: 10px;
+    font-size: 14px;
+}
+.db-over strong {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 20px;
+    color: #4083a9;
+}
+.db-over strong:hover {
+    color: #205f82;
+}
+.db-over:hover em,
+.db-over:hover strong {
+}
+.db-link img {
     vertical-align: bottom;
     max-width: 100%;
     max-height: 100%;
