@@ -119,7 +119,7 @@ KISSY.add(function(S, Node, Event, Base) {
         
         /**
          * @attribute margin
-         * @description 滚动距离偏差
+         * @description 滚动距离偏差，上下左右写法类似css
          * @type Number
          * @default 30
          */
@@ -284,33 +284,6 @@ KISSY.add(function(S, Node, Event, Base) {
         _detachScroll: function() {
             Event.detach(this._scrollNode, EVT_SCROLL, this._afterScroll, this);
             Event.detach(win, EVT_RESIZE, this._afterResize, this);
-        },
-        
-        /**
-         * 更新四个方向的偏移值
-         * @method _refreshMargin
-         * @protected
-         */
-        _refreshMargin: function() {
-            var margin = this.get(MARGIN) + '',
-                vals = margin.split(' ');
-            
-            this._marginTop = Number(vals[0]);
-            this._marginRight = Number(vals[1]);
-            this._marginBottom = Number(vals[2]);
-            this._marginLeft = Number(vals[3]);
-            
-            switch (vals.length) {
-                case 1:
-                    this._marginRight = this._marginBottom = this._marginLeft = this._marginTop;
-                    break;
-                case 2:
-                    this._marginBottom = this._marginTop;
-                    this._marginLeft = this._marginRight;
-                    break;
-                case 3:
-                    this._marginLeft = this._marginRight;
-            } 
         },
         
         /**
