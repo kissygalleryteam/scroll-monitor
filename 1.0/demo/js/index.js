@@ -176,7 +176,7 @@ S.use('node,sizzle,ajax,rich-base,gallery/scroll-monitor/1.0/,gallery/juicer/1.0
             imgs[i] && bindImageLoad(imgs[i]);
         }
 
-        monitor.checkScroll(true);
+        monitor.checkScroll();
     });
     
     loader.on('empty', function() {
@@ -231,8 +231,8 @@ S.use('node,sizzle,ajax,rich-base,gallery/scroll-monitor/1.0/,gallery/juicer/1.0
         }
     });
     
-    dbList.delegate('click', '.db-over', function(e) {
-        var target = S.one(e.currentTarget).one('strong');
+    dbList.delegate('click', '.db-over strong', function(e) {
+        var target = S.one(e.currentTarget);
         e.halt();
         tabItems.removeClass('active');
         playerTabs.item(0).addClass('active');
