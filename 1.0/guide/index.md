@@ -45,8 +45,8 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>参数名</th>
-            <th>默认值</th>
+            <th width="100">参数名</th>
+            <th width="130">默认值</th>
             <th>描述</th>
         </tr>
     </thead>
@@ -86,8 +86,8 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>事件名</th>
-            <th>触发时机</th>
+            <th width="150">事件名</th>
+            <th width="300">触发时机</th>
             <th>事件对象<code>e</code></th>
         </tr>
     </thead>
