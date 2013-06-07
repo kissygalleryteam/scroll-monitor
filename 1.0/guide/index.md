@@ -1,6 +1,6 @@
 ## ScrollMonitor
 
-- by 虎牙
+- BY 虎牙
 
 ## 简介
 
@@ -8,37 +8,37 @@
 
 ## 开始使用
 
-        <script>
-            
-            KISSY.use('gallery/scroll-monitor/1.0/', function(S, ScrollMonitor) {
-                // 你的代码
-            });
-            
-        </script>
+    <script>
+        
+        KISSY.use('gallery/scroll-monitor/1.0/', function(S, ScrollMonitor) {
+            // 你的代码
+        });
+        
+    </script>
 
 ## 简单例子
 
-        KISSY.use('gallery/scroll-monitor/1.0/', function(S, ScrollMonitor) {
+    KISSY.use('gallery/scroll-monitor/1.0/', function(S, ScrollMonitor) {
+        
+        // 初始化
+        var monitor = new ScrollMonitor();
+        
+        // 绑定监听滚动到底部事件
+        monitor.on('scrollToBottom', function(e) {
             
-            // 初始化
-            var monitor = new ScrollMonitor();
+            // 加载更多内容
+            var hasMore = loadMore();
             
-            // 绑定监听滚动到底部事件
-            monitor.on('scrollToBottom', function(e) {
-                
-                // 加载更多内容
-                var hasMore = loadMore();
-                
-                // 如果没有更多内容，停止监听
-                if (hasMore) {
-                    this.stop();
-                }
-            });
-            
-            // 开始监听
-            monitor.run();
-            
+            // 如果没有更多内容，停止监听
+            if (hasMore) {
+                this.stop();
+            }
         });
+        
+        // 开始监听
+        monitor.run();
+        
+    });
 
 ## 配置参数
 
@@ -74,12 +74,12 @@
     </tbody>
 </table>
 
-        var monitor = new ScrollMonitor({
-            node: '.box',
-            margin: '10 20 5 15',
-            delay: 20,
-            run: true
-        });
+    var monitor = new ScrollMonitor({
+        node: '.box',
+        margin: '10 20 5 15',
+        delay: 20,
+        run: true
+    });
 
 ## 事件列表
 
