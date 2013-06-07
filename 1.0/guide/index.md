@@ -143,12 +143,18 @@
             </td>
         </tr>
         <tr>
-            <td>scrollTop/scrollBottom/scrollLeft/scrollRight</td>
+            <td>
+                <p>scrollTop/scrollBottom</p>
+                <p>scrollLeft/scrollRight</p>
+            </td>
             <td>元素往上下左右四个方向滚动时</td>
             <td>同上</td>
         </tr>
         <tr>
-            <td>scrollToTop/scrollToBottom/scrollToLeft/scrollToRight</td>
+            <td>
+                <p>scrollToTop/scrollToBottom</p>
+                <p>scrollToLeft/scrollToRight</p>
+            </td>
             <td>元素滚动至上下左右四个边界时</td>
             <td>同上</td>
         </tr>
