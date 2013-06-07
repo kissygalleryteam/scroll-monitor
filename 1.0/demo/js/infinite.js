@@ -1,4 +1,33 @@
-S.use('node,sizzle,ajax,rich-base,gallery/scroll-monitor/1.0/,gallery/juicer/1.0/', function (S, Node, Sizzle, Ajax, RichBase, ScrollMonitor, Juicer) {
+S.use('node,sizzle,ajax,rich-base', function (S, Node, Sizzle, Ajax, RichBase, ScrollMonitor, Juicer) {
+    
+    function ExtA() {
+        console.log('ca');
+    }
+    
+    ExtA.prototype = {
+        initializer: function() {
+            console.log('a');
+        }    
+    };
+    
+    function ExtB() {
+        console.log('cb');
+    }
+    
+    ExtB.prototype = {
+        initializer: function() {
+            console.log('b');
+        }    
+    };
+    
+    var Main = RichBase.extend([ExtA, ExtB], {
+        initializer: function() {
+            console.log('m');
+        }    
+    });
+    
+    new Main();
+    return;
     
     var DribbbleLoader = RichBase.extend({
         
