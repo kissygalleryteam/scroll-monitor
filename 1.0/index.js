@@ -104,6 +104,9 @@ KISSY.add(function(S, Node, Event, Base) {
                 }
                 
                 return S.one(v);
+            },
+            getter: function(v) {
+                return v || S.one(body);
             }
     	},
     	
@@ -157,7 +160,7 @@ KISSY.add(function(S, Node, Event, Base) {
          * @method init
          * @public
          */
-        init: function(node) {
+        init: function() {
             this._node = this.get(NODE);
             this._domNode = this._node[0];
             
@@ -503,14 +506,15 @@ KISSY.add(function(S, Node, Event, Base) {
             viewportHeight: viewportHeight,
             viewportWidth : viewportWidth,
             
+            scrollHeight: scrollHeight,
+            scrollWidth : scrollWidth,
+            
             scrollable  : scrollHeight > viewportHeight,
             
-            scrollBottom: scrollBottom,
-            scrollHeight: scrollHeight,
-            scrollLeft  : scrollLeft,
-            scrollRight : scrollRight,
             scrollTop   : scrollTop,
-            scrollWidth : scrollWidth
+            scrollBottom: scrollBottom,
+            scrollLeft  : scrollLeft,
+            scrollRight : scrollRight
         };
     };
     
