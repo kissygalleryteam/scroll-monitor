@@ -1,13 +1,17 @@
 {
     "name": "scroll-monitor",
-    "version": "1.0",
-    "desc": "滚动监听器，获取滚动信息，添加不同状态的滚动事件，适用于下拉加载",
-    "cover": "",
+    "comName":"ScrollMonitor",
+    "version": "1.1",
+    "desc": "滚动监听器",
+    "tag":"scroll,monitor,kissy-mini",
+    "githubName":"kingback",
     "author": {
         "name": "虎牙",
-        "email": "ningzbruc@gmail.com",
-        "page": "https://github.com/kingback"
+        "email": "huya.nzb@alibaba-inc.com",
+        "page": "http://github.com/kingback/"
     },
-    "type": "kissy-pie",
-    "type-url": "http://abc.alibaba-inc.com/r/kissy-pie"
+	"flexComboPort":"8081",
+	"reserveServerPort":"8080",
+    "type": "kissy-gallery",
+    "type-url": "http://gallery.kissyui.com/guide"
 }
