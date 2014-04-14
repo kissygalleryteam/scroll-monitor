@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>ScrollMonitor - Dribbble</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link href="http://d13yacurqjgara.cloudfront.net/assets/favicon-e077da1e1160970a2edcc05e6e7dc20b.ico" rel="icon" />
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+        <meta content="telephone=no,email=no" name="format-detection" />
+        <meta content="yes" name="apple-touch-fullscreen" />
+        <meta content="width" name="mobileOptimized" />
+        <meta content="true" name="handheldFriendly" />
+        <link rel="stylesheet" href="http://a.tbcdn.cn/p/global/1.0/global-min.css" />
+        <link rel="stylesheet" href="./css/index.css" />
+        <script src="http://g.tbcdn.cn/kissy/k/1.4.2/seed-min.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div class="page">
+            <div class="header">
+                <h1>
+                    <a href="http://dribbble.com/" target="_blank">
+                        <img src="http://d13yacurqjgara.cloudfront.net/assets/logo-small-2x-8b3454458efece701f3545c64b5f0846.png" width="100" height="26" title="dribbble" />
+                    </a>
+                </h1>
+            </div>
+            <div class="tabs">
+                <ul class="clearfix">
+                    <li data-api="list" data-cfg="list:popular" class="active">Popular</li>
+                    <li data-api="list" data-cfg="list:everyone">Everyone</li>
+                    <li data-api="list" data-cfg="list:debuts">Debuts</li>
+                    <li data-api="player" data-cfg="" class="player hidden">Player</li>
+                    <li data-api="following" data-cfg="" class="player hidden">Following</li>
+                    <li data-api="likes" data-cfg="" class="player hidden">Likes</li>
+                </ul>
+            </div>
+            <script type="text/x-template" id="J_db_template">
+            {@each shots as s,k}
+                <li class="db-item">
+                    <div class="db-con">
+                        <div class="db-shot">
+                            <div class="db-image">
+                                <a href="${s.url}" target="_blank" class="db-link">
+                                    <img src="${s.image_teaser_url}" title="${s.title}" />
+                                </a>
+                                <a href="${s.url}" target="_blank" class="db-over">
+                                    <strong data-player="${s.player.name}" data-id="${s.player.id}" data-api="player" data-cfg="id:${s.player.id}">${s.player.name}</strong>
+                                    <em>${s.title}</em>
+                                </a>
+                            </div>
+                        </div>
+                        <ul class="db-tools clearfix">
+                            <li class="db-fav">
+                                <a href="${s.url}/fans" target="_blank" title="See fans of this screenshot">${s.likes_count}</a>
+                            </li>
+                            <li class="db-cmnt">
+                                <a href="${s.url}#comments" target="_blank" title="View comments on this screenshot">${s.comments_count}</a>
+                            </li>
+                            <li class="db-views">
+                                <a href="javascript:void('views')">${s.views_count}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            {@/each}
+            </script>
+            <div class="db-wrapper">
+                <ol class="db-list clearfix"></ol>
+            </div>
+            <div class="db-loading">
+                <p><b></b><span>Loading Shots...</span></p>
+            </div>
+        </div>
+        
+        <script>
+            var S = KISSY;
+            if (location.href.indexOf('ks-debug') > -1 || S.Config.debug) {
+                var srcPath = "../../../";
+                S.config({
+                    packages:[
+                        {
+                            name:"gallery",
+                            path:srcPath,
+                            charset:"utf-8",
+                            ignorePackageNameInUri:true,
+                            debug:true
+                        }
+                    ]
+                });
+            }
+        </script>
+        <script src="./js/index.js"></script>
+    </body>
+</html>
