@@ -1,0 +1,350 @@
+html {
+    background: #f0f0f0;
+}
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
+}
+.hidden {
+    display: none;
+}
+
+.header {
+    background: #333;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+.header h1 {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 15px 10px;
+}
+.tabs {
+    font-size: 14px;
+    color: #aaa;
+    padding: 0 10px 10px;
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    background: #f0f0f0;
+    z-index: 10;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.tabs ul {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 10px 0;
+    border-bottom: 1px solid #cecece;
+}
+.tabs li {
+    float: left;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.tabs li:hover {
+    color: #777;
+}
+.tabs li.active,
+.tabs li.active:hover {
+    font-weight: bold;
+    color: #555;
+}
+
+.db-wrapper {
+    max-width: 940px;
+    padding: 102px 10px 0;
+    margin: 0 auto;
+}
+.db-list {
+    overflow: hidden;
+    min-height: 200px;
+}
+.db-item {
+    float: left;
+    width: 23.404255319148937%;
+    background: #fff;
+    margin-top: 2.127659574468085%;
+    margin-right: 2.127659574468085%;
+    
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.07);
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.07);
+    -o-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.07);
+    -ms-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.07);
+    
+}
+.db-item:hover {
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.12);
+    -o-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.12);
+    -ms-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.12);
+}
+.db-list .db-item:nth-child(4n) {
+    margin-right: 0;
+}
+.db-con {
+    padding: 10px;
+}
+.db-shot {
+    position: relative;
+}
+.db-image {
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%;
+}
+.db-link,
+.db-over {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+} 
+.db-over {
+    background: rgba(255, 255, 255, 1);
+    color: #666;
+    opacity: 0;
+    padding: 10px;
+    left: -10px;
+    top: -10px;
+    
+    -webkit-transition: opacity 0.2s linear 0s;
+    -moz-transition: opacity 0.2s linear 0s;
+    -o-transition: opacity 0.2s linear 0s;
+    -ms-transition: opacity 0.2s linear 0s;
+    transition: opacity 0.2s linear 0s;
+}
+.db-over:hover {
+    background: rgba(255, 255, 255, 0.9);
+    opacity: 1;
+    color: #666;
+    text-decoration: none;
+}
+.db-over em {
+    display: block;
+    padding: 10px;
+    font-size: 14px;
+}
+.db-over strong {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 20px;
+    color: #4083a9;
+}
+.db-over strong:hover {
+    color: #205f82;
+}
+.db-over:hover em,
+.db-over:hover strong {
+}
+.db-link img {
+    vertical-align: bottom;
+    max-width: 100%;
+    max-height: 100%;
+    -webkit-transition: opacity 0.25s linear 0s;
+    -moz-transition: opacity 0.25s linear 0s;
+    -o-transition: opacity 0.25s linear 0s;
+    -ms-transition: opacity 0.25s linear 0s;
+    transition: opacity 0.25s linear 0s;
+}
+.db-tools {
+    margin-top: 10px;
+}
+.db-tools li {
+    float: right;
+    margin-left: 12px;
+    line-height: 12px;
+}
+.db-tools a {
+    display: inline-block;
+    padding-left: 15px;
+    color: #aaa;
+}
+.db-tools a:hover {
+    color: #777;
+    text-decoration: none;
+}
+.db-fav a {
+    background: url("http://d13yacurqjgara.cloudfront.net/assets/icon-hearts-2x-56b58e73d466440335e6308a8a841fb0.png") 0 1px no-repeat;
+    -webkit-background-size: 12px 45px;
+    -moz-background-size: 12px 45px;
+    background-size: 12px 45px;
+}
+.db-cmnt a {
+    background: url("http://d13yacurqjgara.cloudfront.net/assets/icon-comments-2x-0e9f7f2ff7983d9eb785c08911525a1a.png") 0 1px no-repeat;
+    -webkit-background-size: 12px 59px;
+    -moz-background-size: 12px 59px;
+    background-size: 12px 59px;
+}
+.db-views a {
+    padding-left: 18px;
+    background: url("http://d13yacurqjgara.cloudfront.net/assets/icon-views-sm-2x-fd71fa265975bcbf0c699f4ab0e0097d.png") 0 1px no-repeat;
+    -webkit-background-size: 15px 10px;
+    -moz-background-size: 15px 10px;
+    background-size: 15px 10px;
+}
+.db-views a:hover {
+    color: #aaa;
+}
+.db-fav a:hover {
+    background-position: 0 -16px;
+}
+.db-cmnt a:hover {
+    background-position: 0 -15px;
+}
+.db-loading {
+    text-align: center;
+    padding: 20px 0;
+    font-family: monaco;
+}
+.db-loading p {
+    display: inline-block;
+    font-size: 18px;
+    color: #ea4c89;
+}
+.db-loading b {
+    display: inline-block;
+    margin-right: 10px;
+    background: url("http://www.thedoghat.com/wp-content/uploads/2013/02/dribbble-logo.png") 0 0 no-repeat;
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+    -webkit-background-size: 30px 30px;
+    -moz-background-size: 30px 30px;
+    -o-background-size: 30px 30px;
+    -ms-background-size: 30px 30px;
+    background-size: 30px 30px;
+    -webkit-animation: circle 1.5s linear 0s infinite normal;
+    -moz-animation: circle 1.5s linear 0s infinite normal;
+    -o-animation: circle 1.5s linear 0s infinite normal;
+    -ms-animation: circle 1.5s linear 0s infinite normal;
+    animation: circle 1.5s linear 0s infinite normal;
+}
+.db-loading b.stop {
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    -o-animation-play-state: paused;
+    -ms-animation-play-state: paused;
+    animation-play-state: paused;
+}
+.db-loading span {
+    display: inline-block;
+    vertical-align: middle;
+}
+@-webkit-keyframes circle { 
+    from { -webkit-transform: rotate(0deg); } 
+    to { -webkit-transform: rotate(360deg); }  
+}
+@-moz-keyframes circle { 
+    from { -moz-transform: rotate(0deg); } 
+    to { -moz-transform: rotate(360deg); }  
+}
+@-o-keyframes circle { 
+    from { -o-transform: rotate(0deg); } 
+    to { -o-transform: rotate(360deg); }  
+}
+@-ms-keyframes circle { 
+    from { -ms-transform: rotate(0deg); } 
+    to { -ms-transform: rotate(360deg); }  
+}
+@keyframes circle { 
+    from { transform: rotate(0deg); } 
+    to { transform: rotate(360deg); }  
+}
+
+@media screen and (max-width: 800px) {
+    .db-tools {
+        display: none;
+    }
+    .db-loading {
+        padding: 17px 0;
+    }
+    .db-loading p {
+        font-size: 16px;
+    }
+    .db-loading b {
+        width: 27px;
+        height: 27px;
+        -webkit-background-size: 27px 27px;
+        -moz-background-size: 27px 27px;
+        -o-background-size: 27px 27px;
+        -ms-background-size: 27px 27px;
+        background-size: 27px 27px;
+    }
+}
+@media screen and (max-width: 720px) {
+    .db-item,
+    .db-list .db-item:nth-child(4n) {
+        width: 31.42857142857143%;
+        margin-top: 2.857142857142857%;
+        margin-right: 2.857142857142857%;
+    }
+    .db-list .db-item:nth-child(3n) {
+        margin-right: 0;
+    }
+    .db-loading {
+        padding: 14px 0;
+    }
+    .db-loading p {
+        font-size: 14px;
+    }
+    .db-loading b {
+        width: 24px;
+        height: 24px;
+        -webkit-background-size: 24px 24px;
+        -moz-background-size: 24px 24px;
+        -o-background-size: 24px 24px;
+        -ms-background-size: 24px 24px;
+        background-size: 24px 24px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .db-list {
+        min-height: 75px;
+    }
+    
+    .db-item,
+    .db-list .db-item:nth-child(3n),
+    .db-list .db-item:nth-child(4n) {
+        width: 47.82608695652174%;
+        margin-top: 4.3478260869565216%;
+        margin-right: 4.3478260869565216%;
+    }
+    .db-list .db-item:nth-child(2n) {
+        margin-right: 0;
+    }
+    .db-loading {
+        padding: 13px 0;
+    }
+    .db-loading p {
+        font-size: 13px;
+    }
+    .db-loading b {
+        width: 20px;
+        height: 20px;
+        -webkit-background-size: 20px 20px;
+        -moz-background-size: 20px 20px;
+        -o-background-size: 20px 20px;
+        -ms-background-size: 20px 20px;
+        background-size: 20px 20px;
+    }
+}
